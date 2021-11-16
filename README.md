@@ -130,7 +130,17 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     $ docker push <provider>/<my_namespace>/<my_repo>:<my_tag>
     ```
     
-1. Update the image name in `deployment.yml` file
+1. Update the image tag (name) in `deployment.yml` file instead of `*`
+    ```
+    spec:
+      containers:
+        - name: nodejs
+          image: *
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+    ```
+
 1. Deploy the application tu Kubernetes cluster
     >The file `deployment.yml` in the root of the project contains a script, which processes the deployment automatically. The objective is to apply this deployment template.
     ```
