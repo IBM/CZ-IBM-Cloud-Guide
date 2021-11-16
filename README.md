@@ -127,7 +127,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 1. Push Docker Image to your Container Registry
 
     ```
-    $ docker push de.icr.io/<my_namespace>/<my_repo>:<my_tag>
+    $ docker push <provider>/<my_namespace>/<my_repo>:<my_tag>
     ```
     
 1. Update the image name in `deployment.yml` file
