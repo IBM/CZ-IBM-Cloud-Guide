@@ -92,9 +92,17 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 1. Create Docker Image
     
     Navigate to the root of this project. To make sure you are in the root paste the following command:
+
+    For MacOs/Linux
      ```
-    $ ls
+    $ ls 
     ```
+
+    For Windows:
+      ```
+    $ cd
+    ```
+
     Output:
     ```
     Dockerfile      
@@ -104,14 +112,13 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     ```
     To create docker image, run the following command:
      ```
-    $ docker build -t de.icr.io/<my_namespace>/<my_repo>:<my_tag> .
+    $ docker build -t <provider>/<my_namespace>/<my_repo>:<my_tag> .
     ```
-    >The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
+    >The `<provider>` is a name of the image registry provider. Depending on your provider choose the correct name. In our case it would be `de.icr.io`. The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
+
+    >To make sure your tag (`<provider>/<my_namespace>/<my_repo>:<my_tag>`) is correct, got to IBM Cloud web console -> Container Registry -> Images -> Create.
     
-    Output:
-    ```
-    To be added
-    ```
+
     The tag is now visible by running this command:
      ```
     $ docker image ls
@@ -122,20 +129,14 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     ```
     $ docker push de.icr.io/<my_namespace>/<my_repo>:<my_tag>
     ```
-    Output:
-    ```
-    To be added
-    ```
+    
 1. Update the image name in `deployment.yml` file
 1. Deploy the application tu Kubernetes cluster
     >The file `deployment.yml` in the root of the project contains a script, which processes the deployment automatically. The objective is to apply this deployment template.
     ```
     $ kubectl apply -f deployment.yml
     ```
-    Output:
-    ```
-    To be added
-    ```
+    
 1. Navigate to your `Kubernetes cluster` in IBM Cloud, click on `Worker nodes` and copy the `Public IP`. 
 
     Paste the IP adress to your browser and add nodePort `30080`.
