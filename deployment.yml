@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
         - name: nodejs
-          image: de.icr.io/ibmguide-demo/demo/hello-world:0.1
+          image: *
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
