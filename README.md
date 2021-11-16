@@ -8,7 +8,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 ## Prerequisities
 1. This demo requires UNIX/LINUX based system. However, it is possible to do this also with Windows. Some commands might change. Alternatively you can use the IBM Cloud Shell in browser.
 1. If you use Windows, install [git](https://git-scm.com/download/win) 
-1. Install _Docker_ of version at least 19.03.13
+1. Install [Docker](https://docs.docker.com/get-docker/) of version at least 19.03.13
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) plugin for _Kubernetes Service_
 
