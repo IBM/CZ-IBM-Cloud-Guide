@@ -6,6 +6,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 
 ---
 ## Prerequisities
+1. You are going to work with your command line/terminal. On MacOS, look for Terminal. On Windows, look for Command Prompt (Command line), and if you have Linux, you will surely know :)
 1. Install  [git for Windows](https://git-scm.com/download/win), [git for Linux](https://git-scm.com/download/linux), or [git for macOS](https://git-scm.com/download/mac)
 1. Install [Docker](https://docs.docker.com/get-docker/) of version at least 19.03.13
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
@@ -22,7 +23,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 ## Tutorial
 1. Clone the repository
 
-    Open command line and navigate to your preffered folder.
+    Open command line and navigate to your preffered folder/directory. 
 
     Examle:
     ```
@@ -35,7 +36,8 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     ```
     > If you are facing any troubles, look at the official documentation for [cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
-1. Create IBM Cloud account [here](https://cloud.ibm.com/registration)
+
+1. Create IBM Cloud account [here](https://cloud.ibm.com/registration). To create an account follow the tutroial in the IBM Cloud Guide in chapter 4.
 1. Login to your IBM Cloud account [here](https://cloud.ibm.com/login)
 1. Create `Kubernetes Service` in IBM Cloud [here](https://cloud.ibm.com/kubernetes/catalog/create)
     1. As `Pricing plan` choose `Free`
@@ -78,7 +80,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     ```
     $ ibmcloud ks cluster config --cluster <your_cluster_id>
     ```
-    >In order to be able to deploy an application to your cluster, you need to store the context of the cluster locally, for which you need to obtain a Cluster ID. Therefore, go to the Kubernetes Cluster in the user interface in the browser via the upper left menu, select here Resource list, then click on Clusters and select your cluster. Here you can see the Cluster ID.
+    >In order to be able to deploy an application to your cluster, you need to store the context of the cluster locally, for which you need to obtain a Cluster ID. Therefore, go to the Kubernetes Cluster in the user interface in the browser via the upper left menu, select [Resource list](https://cloud.ibm.com/resources), then click on Clusters and select your cluster. Here you can see the Cluster ID.
 
     Output:
     
@@ -93,7 +95,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 
 1. Create Docker Image
     
-    Navigate to the root of this project. To make sure you are in the root paste the following command:
+    Navigate to the root of this project. To make sure you are in the root paste the following command and see if you can see your repository:
 
     For MacOs/Linux
      ```
@@ -116,7 +118,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
      ```
     $ docker build -t <provider>/<my_namespace>/<my_repo>:<my_tag> .
     ```
-    >The `<provider>` is a name of the container registry provider. Depending on your provider choose the correct name. In case of the container registry in IBM Cloud it depends on the location of your registry. To obtain the correct value, got to [images](https://cloud.ibm.com/registry/images) in IBM Cloud, choose your location and click **create**. The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
+    >The `<provider>` is a name of the container registry provider. Depending on your provider choose the correct name. In case of the container registry in IBM Cloud it depends on the location of your registry. To obtain the correct value, go to [images](https://cloud.ibm.com/registry/images) in IBM Cloud, choose your location and click **create**. The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
     
 
     The tag is now visible by running this command:
