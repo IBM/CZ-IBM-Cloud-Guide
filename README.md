@@ -37,7 +37,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     > If you are facing any troubles, look at the official documentation for [cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
 
-1. Create IBM Cloud account [here](https://cloud.ibm.com/registration). To create an account follow the tutroial in the IBM Cloud Guide in chapter 4.
+1. Create IBM Cloud account [here](https://cloud.ibm.com/registration). To create an account follow the tutorial in the IBM Cloud Guide in chapter 4.
 1. Login to your IBM Cloud account [here](https://cloud.ibm.com/login)
 1. Create `Kubernetes Service` in IBM Cloud [here](https://cloud.ibm.com/kubernetes/catalog/create)
     1. As `Pricing plan` choose `Free`
@@ -52,7 +52,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     $ ibmcloud login -sso 
     ```
     Output:
-    >Paste `y` to get one time password in browser and then copy and paste the one time password.
+    >Paste `y` to get one time password in browser and then copy and paste the one time password. Otherwise open the URL in browser manually.
     ```
     API endpoint: https://cloud.ibm.com
     Region: eu-de
@@ -61,7 +61,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     Open the URL in the default browser? [Y/n] > 
     ``` 
     
-1. Login to Container Registry
+1. Login to the Container Registry
     ```
     $ ibmcloud cr login
     ```
@@ -80,7 +80,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     ```
     $ ibmcloud ks cluster config --cluster <your_cluster_id>
     ```
-    >In order to be able to deploy an application to your cluster, you need to store the context of the cluster locally, for which you need to obtain a Cluster ID. Therefore, go to the Kubernetes Cluster in the user interface in the browser via the upper left menu, select [Resource list](https://cloud.ibm.com/resources), then click on Clusters and select your cluster. Here you can see the Cluster ID.
+    >In order to be able to deploy an application to your cluster, you need to store the context of the cluster locally, for which you need to obtain a Cluster ID. Therefore, go to the Kubernetes Cluster in the user interface in the browser via the upper left menu, select [Resource list](https://cloud.ibm.com/resources), then click on Clusters and select your cluster. Here you can see and copy the Cluster ID.
 
     Output:
     
@@ -114,7 +114,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     app             
     deployment.yml
     ```
-    To create docker image, run the following command:
+    To create a docker image, run the following command:
      ```
     $ docker build -t <provider>/<my_namespace>/<my_repo>:<my_tag> .
     ```
