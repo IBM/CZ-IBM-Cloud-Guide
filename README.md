@@ -143,6 +143,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
           ports:
             - containerPort: 3000
     ```
+    > The image tag(name) is the value, that you used while building and pushing the docker image: `<provider>/<my_namespace>/<my_repo>:<my_tag>`
 
 1. Deploy the application into Kubernetes cluster
     >The file `deployment.yml` in the root of the project contains a script, which processes the deployment automatically. The objective is to apply this deployment template.
