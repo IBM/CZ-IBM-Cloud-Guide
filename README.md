@@ -6,8 +6,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 
 ---
 ## Prerequisities
-1. This demo requires UNIX/LINUX based system. However, it is possible to do this also with Windows. Some commands might change. Alternatively you can use the IBM Cloud Shell in browser.
-1. If you use Windows, install [git](https://git-scm.com/download/win) 
+1. Install  [git for Windows](https://git-scm.com/download/win), [git for Linux](https://git-scm.com/download/linux), or [git for macOS](https://git-scm.com/download/mac)
 1. Install [Docker](https://docs.docker.com/get-docker/) of version at least 19.03.13
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started)
 1. Install [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started) plugin for _Kubernetes Service_
@@ -32,8 +31,10 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     Clone this repository:
 
     ```
-    $  git clone https://github.ibm.com/IBM-Cloud-Guide/Kubernetes.git
+    $  git clone https://github.com/IBM/CZ-IBM-Cloud-Guide.git
     ```
+    > If you are facing any troubles, look at the official documentation for [cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
 1. Create IBM Cloud account [here](https://cloud.ibm.com/registration)
 1. Login to your IBM Cloud account [here](https://cloud.ibm.com/login)
 1. Create `Kubernetes Service` in IBM Cloud [here](https://cloud.ibm.com/kubernetes/catalog/create)
@@ -75,9 +76,9 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 1. Get your Kubernetes cluster context
 
     ```
-    $ ibmcloud ks cluster config --cluster <cluster_id>
+    $ ibmcloud ks cluster config --cluster <your_cluster_id>
     ```
-    >Cluster ID can be found in IBM Cloud Kubernetes console
+    >In order to be able to deploy an application to your cluster, you need to store the context of the cluster locally, for which you need to obtain a Cluster ID. Therefore, go to the Kubernetes Cluster in the user interface in the browser via the upper left menu, select here Resource list, then click on Clusters and select your cluster. Here you can see the Cluster ID.
 
     Output:
     
@@ -101,7 +102,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 
     For Windows:
       ```
-    $ cd
+    $ dir
     ```
 
     Output:
@@ -115,9 +116,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
      ```
     $ docker build -t <provider>/<my_namespace>/<my_repo>:<my_tag> .
     ```
-    >The `<provider>` is a name of the image registry provider. Depending on your provider choose the correct name. In our case it would be `de.icr.io`. The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
-
-    >To make sure your tag (`<provider>/<my_namespace>/<my_repo>:<my_tag>`) is correct, got to IBM Cloud web console -> Container Registry -> Images -> Create.
+    >The `<provider>` is a name of the container registry provider. Depending on your provider choose the correct name. In case of the container registry in IBM Cloud it depends on the location of your registry. To obtain the correct value, got to [images](https://cloud.ibm.com/registry/images) in IBM Cloud, choose your location and click **create**. The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
     
 
     The tag is now visible by running this command:
@@ -130,6 +129,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     ```
     $ docker push <provider>/<my_namespace>/<my_repo>:<my_tag>
     ```
+    > The created Docker Image needs to be pushed to the Container Registry in order for Kubernetes Service to retrieve this Docker Image. Your image will now be displayed in the IBM Cloud Container Registry under [images](https://cloud.ibm.com/registry/images).
     
 1. Update the image tag (name) in `deployment.yml` file instead of `*`
     ```
@@ -142,7 +142,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
             - containerPort: 3000
     ```
 
-1. Deploy the application tu Kubernetes cluster
+1. Deploy the application into Kubernetes cluster
     >The file `deployment.yml` in the root of the project contains a script, which processes the deployment automatically. The objective is to apply this deployment template.
     ```
     $ kubectl apply -f deployment.yml
