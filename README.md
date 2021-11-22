@@ -44,8 +44,9 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     1. Optionally change `Cluster name` and `Resource group`
     1. Click `Create`
 1. Create `namespace` in `Container Registry` [here](https://cloud.ibm.com/registry/namespaces)
+    1. Before creating the namespace, choose your preffered location
     1. Optionally change `Resource group`
-    1. Paste `Name` 
+    1. Fill in `Name` 
     1. Click `Create`
 1. Login to IBM Cloud
      ```
@@ -61,7 +62,7 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     Open the URL in the default browser? [Y/n] > 
     ``` 
     
-1. Login to the Container Registry
+1. Login to the [Container Registry](https://cloud.ibm.com/docs/Registry?topic=Registry-getting-started)
     ```
     $ ibmcloud cr login
     ```
@@ -75,23 +76,14 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
 
     OK
     ``` 
+    > The most important issue here is to login to the correct Container Registry. Note, that in the output is `Logged in to 'de.icr.io'`. The `de.icr.io` is specific for a Container Registry located in Frankfurt. For example, Contrainer Registry in London would be `uk.icr.io` or Global Container Registry is `icr.io`. You will be automatically logged in to the registry in as is in your ibm cloud target. You can see the target by running `ibmcloud target` after logging to ibm cloud account. 
+
 1. Get your Kubernetes cluster context
 
     ```
     $ ibmcloud ks cluster config --cluster <your_cluster_id>
     ```
     >In order to be able to deploy an application to your cluster, you need to store the context of the cluster locally, for which you need to obtain a Cluster ID. Therefore, go to the Kubernetes Cluster in the user interface in the browser via the upper left menu, select [Resource list](https://cloud.ibm.com/resources), then click on Clusters and select your cluster. Here you can see and copy the Cluster ID.
-
-    Output:
-    
-    ```
-    Logging in to 'registry.eu-de.bluemix.net'...
-    Logged in to 'registry.eu-de.bluemix.net'.
-    Logging in to 'de.icr.io'...
-    Logged in to 'de.icr.io'.
-
-    OK
-    ``` 
 
 1. Create Docker Image
     
@@ -118,7 +110,15 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
      ```
     $ docker build -t <provider>/<my_namespace>/<my_repo>:<my_tag> .
     ```
-    >The `<provider>` is a name of the container registry provider. Depending on your provider choose the correct name. In case of the container registry in IBM Cloud it depends on the location of your registry. To obtain the correct value, go to [images](https://cloud.ibm.com/registry/images) in IBM Cloud, choose your location and click **create**. The `<my_namespace>` is the namespace you have created in Container Registry. `<my_repo>` will be created automatically. `<my_tag>` is the name of your image and you can optionally add version.
+    >The `<provider>` is a name of the container registry provider. Depending on your provider choose the correct name. In case of the container registry in IBM Cloud it depends on the location of your registry. Make sure you are using the location, which your namespace is created in. To obtain the correct value, go to [images](https://cloud.ibm.com/registry/images) in IBM Cloud, choose your location and click **create**. 
+
+    >The `<my_namespace>` is the namespace you have created in Container Registry. Paste the name of a namespace, that you have created.
+    
+    >The `<my_repo>` is a name of a repository in [Repositories](https://cloud.ibm.com/registry/repos). The repository will be created automatically, so there is no need to create it. You can use any value for `<my_repo>`.  
+    
+    >The `<my_tag>` can either contain any text or number value. For example, you can paste a version of this image like `0.0.1` or `latest`.
+
+    > Make sure, the docker is running. 
     
 
     The tag is now visible by running this command:
@@ -162,4 +162,45 @@ The purpose of this project is to deploy a simple node.js application to Kuberne
     Congratulations! Now you are able to see the application in browser!
 
 
+## Troubleshooting
 
+You might face issues while working on this guide. Here are the most common ones and the solution.
+### Docker deamon is not running
+
+Do you get a similar error after running `docker build` or `docker push`? 
+
+```
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?
+```
+
+The reason is, that your docker is not running. Try to open the application or follow the [official documentation](https://docs.docker.com/config/daemon/)
+
+### The login credentials are not valid
+
+Do you get this error?
+
+```
+➜  CZ-IBM-Cloud-Guide git:(main) docker push icr.io/some-namespace/some-repo:1.0
+The push refers to repository [icr.io/some-namespace/some-repo]
+035d751a3458: Preparing
+cf0c0a876640: Preparing
+c566b09f3beb: Preparing
+e62349c14338: Preparing
+ca44545b101f: Preparing
+b26bc695d405: Waiting
+1a058d5342cc: Waiting
+unauthorized: The login credentials are not valid, or your IBM Cloud account is not active.
+```
+Solution:
+1. Make sure, you are logged in to `ibmcloud` by running the following command:
+
+    ```
+    ibmcloud target
+    ```
+
+1. Make sure you have logged in to Container Registry
+
+    ```
+    ibmcloud cr login
+    ```
+1. Check if the Container Registry that you are logged into matches the location, where your [namespace](https://cloud.ibm.com/registry/namespaces) is created. For example, if your namespace is located in Frankfurt, you need to login to the Container Registry `de.icr.io`. 
